@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                checkout scm
-                echo 'Code checkout completed successfully!'
+                git branch: 'main', url: 'https://github.com/RacheliIsGr8/python-flask-hello-world.git'
+                
             }
         }
         stage('Docker Build+Tag') {
