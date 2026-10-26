@@ -33,3 +33,5 @@ stage('Docker Push'){
         }
     }
 }
+    }
+}
