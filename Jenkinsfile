@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = "flask-app" // הגדרת שם האימג' לשימוש בגלובל
+        IMAGE_NAME = "python-flask-hello-world" // הגדרת שם האימג' לשימוש בגלובל
     }
     stages {
         stage('Code Checkout') {
