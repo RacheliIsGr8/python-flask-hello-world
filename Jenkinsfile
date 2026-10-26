@@ -18,16 +18,18 @@ pipeline {
                 }
             }
         }
-        // שלב חדש - Docker Push לפי המשימה
-        stage('Docker Push'){
-            steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){
-                    sh '''
-                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker push ${IMAGE_NAME}:latest
-                    '''
-                }
-            }
+stage('Docker Push'){
+    steps{
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]){
+            sh '''
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            
+            # תיוג האימג' עם שם המשתמש שלך ב-Docker Hub
+            docker tag ${IMAGE_NAME}:latest $DOCKER_USER/python-flask-hello-world:latest
+            
+            # דחיפה לענן
+            docker push $DOCKER_USER/python-flask-hello-world:latest
+            '''
         }
     }
 }
